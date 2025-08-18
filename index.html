@@ -279,20 +279,20 @@ const svg = {
    Optional: add img: svg.parabola (or circle/square/rect/line)
    ============================================================ */
 const questions = [
-  { q: "Find the slope of the tangent to y = x² at x = 3.", options: ["3","6","9","12"], answer: "6", img: svg.parabola },
-  { q: "If radius of a circle increases at 2 cm/s, find the rate of change of area when r = 7 cm.", options: ["28π cm²/s","14π cm²/s","21π cm²/s","49π cm²/s"], answer: "28π cm²/s", img: svg.circle },
-  { q: "Find dy/dx at x = 2 for y = 3x².", options: ["6","9","12","8"], answer: "12" },
-  { q: "For f(x) = x² − 4x + 5, the function is decreasing in which interval?", options: ["x > 2","x < 2","x = 2","None"], answer: "x < 2" },
-  { q: "The maximum value of y = −x² + 4x occurs at:", options: ["x = 0","x = 1","x = 2","x = 4"], answer: "x = 2" },
-  { q: "Find the equation of the tangent to y = 2x + 3 at x = 1.", options: ["y = 2x + 1","y = 2x + 5","y = x + 3","y = 2x − 1"], answer: "y = 2x + 5", img: svg.line },
-  { q: "If each side of a square increases at 5 cm/s, find the rate of change of area when side = 4 cm.", options: ["20 cm²/s","25 cm²/s","40 cm²/s","50 cm²/s"], answer: "40 cm²/s", img: svg.square },
-  { q: "What value of x minimizes P = x + 16/x for x > 0?", options: ["2","4","6","8"], answer: "4", img: svg.rect },
-  { q: "Use linear approximation of f(x)=√x near x=36 to estimate √36.5.", options: ["6.01","6.02","6.03","6.04"], answer: "6.02" },
-  { q: "If dy/dx = 0 at x = 3, then at x = 3 the function has:", options: ["Maximum","Minimum","Turning point","Cannot say without more info"], answer: "Cannot say without more info" },
+  { question: "Find the slope of the tangent to y = x² at x = 3.", options: ["3","6","9","12"], answer: "6", img: svg.parabola },
+  { question: "If radius of a circle increases at 2 cm/s, find the rate of change of area when r = 7 cm.", options: ["28π cm²/s","14π cm²/s","21π cm²/s","49π cm²/s"], answer: "28π cm²/s", img: svg.circle },
+  { question: "Find dy/dx at x = 2 for y = 3x².", options: ["6","9","12","8"], answer: "12" },
+  { question: "For f(x) = x² − 4x + 5, the function is decreasing in which interval?", options: ["x > 2","x < 2","x = 2","None"], answer: "x < 2" },
+  { question: "The maximum value of y = −x² + 4x occurs at:", options: ["x = 0","x = 1","x = 2","x = 4"], answer: "x = 2" },
+  { question: "Find the equation of the tangent to y = 2x + 3 at x = 1.", options: ["y = 2x + 1","y = 2x + 5","y = x + 3","y = 2x − 1"], answer: "y = 2x + 5", img: svg.line },
+  { question: "If each side of a square increases at 5 cm/s, find the rate of change of area when side = 4 cm.", options: ["20 cm²/s","25 cm²/s","40 cm²/s","50 cm²/s"], answer: "40 cm²/s", img: svg.square },
+  { question: "What value of x minimizes P = x + 16/x for x > 0?", options: ["2","4","6","8"], answer: "4", img: svg.rect },
+  { question: "Use linear approximation of f(x)=√x near x=36 to estimate √36.5.", options: ["6.01","6.02","6.03","6.04"], answer: "6.02" },
+  { question: "If dy/dx = 0 at x = 3, then at x = 3 the function has:", options: ["Maximum","Minimum","Turning point","Cannot say without more info"], answer: "Cannot say without more info" },
   
   // ---------------- EASY ----------------
   {
-    q: "Find the slope of the tangent to the curve y = x² at x = 3",
+    question: "Find the slope of the tangent to the curve y = x² at x = 3",
     a: "3",
     b: "6",
     c: "9",
