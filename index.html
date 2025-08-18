@@ -364,7 +364,7 @@ const elReviewList = document.getElementById('reviewList');
 function render(){
   const q = questions[i];
   elQno.textContent = `Question ${i+1} of ${questions.length}`;
-  elQ.textContent = q.q;
+  elQ.textContent = "Q. "+q.q;
 
   if(q.img){ elImg.style.display=''; elImg.innerHTML = q.img; }
   else { elImg.style.display='none'; elImg.innerHTML=''; }
