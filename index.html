@@ -366,8 +366,21 @@ function render(){
   elQno.textContent = `Question ${i+1} of ${questions.length}`;
   elQ.textContent = "Q. "+q.q;
 
-  if(q.img){ elImg.style.display=''; elImg.innerHTML = q.img; }
-  else { elImg.style.display='none'; elImg.innerHTML=''; }
+  if(q.img) {
+  // Extract what comes after "svg.", like "parabola"
+  const imgKey = q.img.split(".")[1];
+  if(svg[imgKey]) {
+    elImg.style.display = '';
+    elImg.innerHTML = svg[imgKey]; // Show SVG markup
+  } else {
+    elImg.style.display = 'none';
+    elImg.innerHTML = '';
+  }
+} else {
+  elImg.style.display = 'none';
+  elImg.innerHTML = '';
+}
+
 
   elOpts.innerHTML = '';
   q.options.forEach((opt, idx)=>{
