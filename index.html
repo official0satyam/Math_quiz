@@ -288,7 +288,254 @@ const questions = [
   { q: "If each side of a square increases at 5 cm/s, find the rate of change of area when side = 4 cm.", options: ["20 cm²/s","25 cm²/s","40 cm²/s","50 cm²/s"], answer: "40 cm²/s", img: svg.square },
   { q: "What value of x minimizes P = x + 16/x for x > 0?", options: ["2","4","6","8"], answer: "4", img: svg.rect },
   { q: "Use linear approximation of f(x)=√x near x=36 to estimate √36.5.", options: ["6.01","6.02","6.03","6.04"], answer: "6.02" },
-  { q: "If dy/dx = 0 at x = 3, then at x = 3 the function has:", options: ["Maximum","Minimum","Turning point","Cannot say without more info"], answer: "Cannot say without more info" }
+  { q: "If dy/dx = 0 at x = 3, then at x = 3 the function has:", options: ["Maximum","Minimum","Turning point","Cannot say without more info"], answer: "Cannot say without more info" } 
+  
+  // ---------------- EASY ----------------
+  {
+    question: "Find the slope of the tangent to the curve y = x² at x = 3",
+    a: "3",
+    b: "6",
+    c: "9",
+    d: "12",
+    correct: "b"
+  },
+  {
+    question: "If y = x³ + 2x, find dy/dx at x = 2",
+    a: "6",
+    b: "8",
+    c: "10",
+    d: "14",
+    correct: "d"
+  },
+  {
+    question: "Find the rate of change of the area of a circle when radius r = 7 cm and dr/dt = 2 cm/sec. <br><img src='circle.png' width='200'>",
+    a: "14π",
+    b: "28π",
+    c: "49π",
+    d: "98π",
+    correct: "d"
+  },
+  {
+    question: "If y = sin x, then dy/dx = ?",
+    a: "cos x",
+    b: "sin x",
+    c: "-cos x",
+    d: "-sin x",
+    correct: "a"
+  },
+  {
+    question: "Find the slope of the tangent to the curve y = √x at x = 4",
+    a: "1/2",
+    b: "1/4",
+    c: "1",
+    d: "2",
+    correct: "a"
+  },
+  {
+    question: "Differentiate y = tan x",
+    a: "cos²x",
+    b: "sec²x",
+    c: "-sec²x",
+    d: "-cos²x",
+    correct: "b"
+  },
+  {
+    question: "If f(x) = x² – 5x + 6, then f'(2) = ?",
+    a: "-1",
+    b: "0",
+    c: "1",
+    d: "2",
+    correct: "a"
+  },
+  {
+    question: "The slope of the tangent to the curve y = ln x at x = 1 is?",
+    a: "0",
+    b: "1",
+    c: "e",
+    d: "∞",
+    correct: "b"
+  },
+  {
+    question: "If y = eˣ, then dy/dx = ?",
+    a: "1",
+    b: "x",
+    c: "eˣ",
+    d: "ln x",
+    correct: "c"
+  },
+  {
+    question: "Find the slope of the tangent to y = cos x at x = 0",
+    a: "0",
+    b: "1",
+    c: "-1",
+    d: "2",
+    correct: "a"
+  },
+
+  // ---------------- MEDIUM ----------------
+  {
+    question: "The maximum value of f(x) = -x² + 4x + 1 is?",
+    a: "5",
+    b: "7",
+    c: "9",
+    d: "10",
+    correct: "b"
+  },
+  {
+    question: "If y = x²eˣ, then dy/dx = ?",
+    a: "x²eˣ + 2xeˣ",
+    b: "x²eˣ – 2xeˣ",
+    c: "eˣ",
+    d: "x² + 2x",
+    correct: "a"
+  },
+  {
+    question: "If the radius of a sphere increases at 0.1 cm/sec, find the rate of increase of volume when r = 10 cm. <br><img src='sphere.png' width='180'>",
+    a: "100π",
+    b: "200π",
+    c: "400π",
+    d: "40π",
+    correct: "c"
+  },
+  {
+    question: "If y = log(x²+1), then dy/dx = ?",
+    a: "2x/(x²+1)",
+    b: "1/(x²+1)",
+    c: "2/(x²+1)",
+    d: "x/(x²+1)",
+    correct: "a"
+  },
+  {
+    question: "The slope of normal to y = x³ at x = 1 is?",
+    a: "-3",
+    b: "1/3",
+    c: "-1/3",
+    d: "3",
+    correct: "c"
+  },
+  {
+    question: "At what point on y = x² is the tangent parallel to line y = 4x + 3?",
+    a: "(1,1)",
+    b: "(2,4)",
+    c: "(3,9)",
+    d: "(4,16)",
+    correct: "b"
+  },
+  {
+    question: "Find the maximum value of y = 4x – x²",
+    a: "2",
+    b: "3",
+    c: "4",
+    d: "5",
+    correct: "d"
+  },
+  {
+    question: "If a stone is dropped into a pond, radius of ripples increases at 5 cm/sec. Find rate of increase of area when radius = 10 cm.",
+    a: "50π",
+    b: "100π",
+    c: "150π",
+    d: "200π",
+    correct: "b"
+  },
+  {
+    question: "Differentiate y = cos⁻¹(x)",
+    a: "1/√(1-x²)",
+    b: "-1/√(1-x²)",
+    c: "x/√(1-x²)",
+    d: "-x/√(1-x²)",
+    correct: "b"
+  },
+  {
+    question: "If f(x) = sin x + cos x, find maximum value of f(x)",
+    a: "√2",
+    b: "2",
+    c: "1",
+    d: "0",
+    correct: "a"
+  },
+
+  // ---------------- HARD ----------------
+  {
+    question: "Find the point on y = √x which is nearest to (4,0). <br><img src='graph1.png' width='220'>",
+    a: "(2, √2)",
+    b: "(1, 1)",
+    c: "(4, 2)",
+    d: "(0, 0)",
+    correct: "a"
+  },
+  {
+    question: "The slope of tangent to curve y² = 4ax at (at², 2at) is?",
+    a: "1/t",
+    b: "t",
+    c: "2t",
+    d: "1/2t",
+    correct: "a"
+  },
+  {
+    question: "If total cost C(x) = 2x³ – 15x² + 36x + 100, find marginal cost when x = 5",
+    a: "35",
+    b: "45",
+    c: "55",
+    d: "65",
+    correct: "b"
+  },
+  {
+    question: "The slope of the tangent to curve x²y + y³ = 7 at (2,1) is?",
+    a: "0",
+    b: "1",
+    c: "2",
+    d: "3",
+    correct: "c"
+  },
+  {
+    question: "If y = (x²+1)/(x-1), find dy/dx",
+    a: "(x²-1)/(x-1)²",
+    b: "(2x(x-1) – (x²+1))/(x-1)²",
+    c: "(x²+2x)/(x-1)²",
+    d: "(2x-1)/(x-1)",
+    correct: "b"
+  },
+  {
+    question: "A ladder 10 m long is leaning against a wall. If the bottom slides at 1 m/sec, find rate at which top descends when bottom is 6 m from wall. <br><img src='ladder.png' width='200'>",
+    a: "1/2 m/sec",
+    b: "3/4 m/sec",
+    c: "4/3 m/sec",
+    d: "5/3 m/sec",
+    correct: "c"
+  },
+  {
+    question: "If y = x^x, then dy/dx = ?",
+    a: "x^x (1 + ln x)",
+    b: "x^x (ln x – 1)",
+    c: "x^(x-1)",
+    d: "ln x",
+    correct: "a"
+  },
+  {
+    question: "A company’s revenue R(x) = 100x – x². Find x for maximum revenue.",
+    a: "25",
+    b: "50",
+    c: "75",
+    d: "100",
+    correct: "b"
+  },
+  {
+    question: "If f(x) = |x|, derivative at x=0 is?",
+    a: "0",
+    b: "1",
+    c: "-1",
+    d: "Does not exist",
+    correct: "d"
+  },
+  {
+    question: "If y = (tan x)/(1+tan x), find dy/dx at x = π/4",
+    a: "0",
+    b: "1/2",
+    c: "1",
+    d: "2",
+    correct: "b"
+  }
+
 ];
 /* ================================
    END QUIZ QUESTIONS
