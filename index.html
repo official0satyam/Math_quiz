@@ -361,41 +361,41 @@ const elSummary = document.getElementById('summary');
 const elReviewModal = document.getElementById('reviewModal');
 const elReviewList = document.getElementById('reviewList');
 
-function render(){
+function render() {
   const q = questions[i];
-  elQno.textContent = `Question ${i+1} of ${questions.length}`;
-  elQ.textContent = "Q. "+q.q;
+  elQno.textContent = `Question ${i + 1} of ${questions.length}`;
+  elQ.textContent = "Q. " + q.q;
 
-  if(q.img) {
-  // Extract what comes after "svg.", like "parabola"
-  const imgKey = q.img.split(".")[1];
-  if(svg[imgKey]) {
-    elImg.style.display = '';
-    elImg.innerHTML = svg[imgKey]; // Show SVG markup
+  if (q.img) {
+    // Extract key after 'svg.'
+    const imgKey = q.img.split(".")[1];
+    if (svg[imgKey]) {
+      elImg.style.display = "flex"; // or '' depending on your CSS
+      elImg.innerHTML = svg[imgKey];
+    } else {
+      elImg.style.display = "none";
+      elImg.innerHTML = "";
+    }
   } else {
-    elImg.style.display = 'none';
-    elImg.innerHTML = '';
+    elImg.style.display = "none";
+    elImg.innerHTML = "";
   }
-} else {
-  elImg.style.display = 'none';
-  elImg.innerHTML = '';
-}
 
-
-  elOpts.innerHTML = '';
-  q.options.forEach((opt, idx)=>{
-    const b = document.createElement('button');
-    b.className = 'btn';
-    b.style.animationDelay = `${idx*0.06 + 0.04}s`; // staggered fade-in
+  elOpts.innerHTML = "";
+  q.options.forEach((opt, idx) => {
+    const b = document.createElement("button");
+    b.className = "btn";
+    b.style.animationDelay = `${idx * 0.06 + 0.04}s`;
     b.textContent = opt;
-    b.onclick = ()=>select(opt, b);
+    b.onclick = () => select(opt, b);
     elOpts.appendChild(b);
   });
 
-  elBar.style.width = ((i)/questions.length*100).toFixed(1)+'%';
+  elBar.style.width = ((i / questions.length) * 100).toFixed(1) + "%";
   elNext.disabled = true;
   locked = false;
 }
+
 
 function select(opt, btn){
   initAudio();
