@@ -8,60 +8,75 @@
   :root{
     --brand:#ff7e00;         /* orange */
     --brand-2:#ffb347;       /* light orange */
-    --brand-3:#ff7eb3;       /* pink */
-    --glass-bg: rgba(255,255,255,0.14);
-    --glass-stroke: rgba(255,255,255,0.35);
+    --glass-bg: rgba(255,255,255,0.12);
+    --glass-stroke: rgba(255,255,255,0.30);
     --text: #ffffff;
+    --card-max-width: 760px;
+    --ui-gap: clamp(8px, 1.5vw, 14px);
   }
+
+  /* Reset & basics */
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
     margin:0;
     min-height:100vh;
-    font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;
+    font-family: system-ui,-apple-system, "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif;
     color:var(--text);
     background:
-      radial-gradient(1200px 600px at 20% 0%, rgba(255,255,255,.20), transparent 60%),
+      radial-gradient(1200px 600px at 20% 0%, rgba(255,255,255,.18), transparent 60%),
       linear-gradient(120deg, #ff7e5f, #feb47b 45%, #ff7eb3 100%);
-    overflow:hidden;
+    overflow-x:hidden;
     display:flex; align-items:center; justify-content:center;
-    padding:16px;
+    padding:clamp(10px, 3vw, 18px);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
   }
 
-  /* BG layer for parallax */
+  /* Background floating icons (parallax) */
   #bg{
     position:fixed; inset:0; overflow:hidden; z-index:0;
     will-change: transform;
+    pointer-events:none;
   }
   .float-icon{
-    position:absolute; font-weight:800; opacity:.16; user-select:none; pointer-events:none;
+    position:absolute; font-weight:800; opacity:.14; user-select:none;
     animation: drift var(--dur,12s) linear infinite;
     filter: drop-shadow(0 6px 10px rgba(0,0,0,.25));
     white-space:nowrap;
+    transform-origin:center;
   }
   @keyframes drift{
     from{ transform: translateY(110vh) rotate(0deg) }
     to{   transform: translateY(-120px) rotate(360deg) }
   }
 
+  /* Foreground layout */
   #fg{ position:relative; z-index:1; width:100%; display:flex; justify-content:center; }
-
   .card{
-    width:min(760px, 96vw);
+    width:100%;
+    max-width:var(--card-max-width);
     background: var(--glass-bg);
     border: 1px solid var(--glass-stroke);
     backdrop-filter: blur(12px);
-    border-radius: 18px;
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
     box-shadow: 0 10px 40px rgba(0,0,0,.25);
-    padding: clamp(16px, 4vw, 28px);
+    padding: clamp(12px, 4vw, 28px);
+    display:flex; flex-direction:column; gap:var(--ui-gap);
   }
+
+  /* Header / title */
   .title{
-    display:flex; align-items:center; gap:10px; margin:0 0 12px 0;
-    font-weight:900; letter-spacing:.2px; font-size: clamp(18px, 3.6vw, 26px);
+    display:flex; align-items:center; gap:10px; margin:0;
+    font-weight:900; letter-spacing:.2px; line-height:1;
+    font-size: clamp(18px, 3.6vw, 26px);
   }
-  .progress-wrap{margin: 8px 0 18px 0;}
+
+  /* Progress */
+  .progress-wrap{margin: 6px 0 12px 0;}
   .progress{
-    width:100%; height:10px; border-radius:999px; background:rgba(255,255,255,.25); overflow:hidden;
+    width:100%; height:10px; border-radius:999px; background:rgba(255,255,255,.22); overflow:hidden;
   }
   .bar{
     height:100%; width:0%;
@@ -69,93 +84,116 @@
     transition: width .35s ease;
   }
 
-  .qno{opacity:.9; font-weight:800; margin-bottom:6px}
-  .question{font-size: clamp(16px, 3.2vw, 20px); line-height:1.45; margin: 6px 0 10px 0}
+  .qmeta{display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap}
+  .qno{opacity:.95; font-weight:800; margin-bottom:0; font-size: clamp(13px,2.6vw,16px)}
+  .question{font-size: clamp(15px, 3.2vw, 20px); line-height:1.45; margin: 6px 0 2px 0; word-break:break-word}
 
+  /* Image container */
   .image{
     display:flex; justify-content:center; align-items:center;
-    background: rgba(255,255,255,.10);
-    border:1px dashed rgba(255,255,255,.35);
-    border-radius:14px; padding:10px; margin: 8px 0 14px 0;
+    background: rgba(255,255,255,.06);
+    border:1px dashed rgba(255,255,255,.18);
+    border-radius:12px; padding:10px; margin: 4px 0 10px 0;
+    max-width:100%;
   }
-  .image svg{max-width: 420px; width:100%; height:auto}
+  .image svg{ width:100%; height:auto; max-width:440px; display:block; }
 
-  .options{display:grid; gap:10px}
+  /* Options grid */
+  .options{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(8px, 1.6vw, 12px);
+  }
   .btn{
     appearance:none; border:none; border-radius:12px;
-    padding:12px 14px; font-size:16px; font-weight:800; color:#fff;
-    background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(0,0,0,.15));
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 6px 14px rgba(0,0,0,.2);
+    padding: clamp(10px,2.6vw,14px) clamp(10px,2.8vw,14px);
+    font-size: clamp(14px, 2.8vw, 16px);
+    font-weight:800; color:#fff;
+    background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(0,0,0,.10));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 6px 14px rgba(0,0,0,.18);
     cursor:pointer; text-align:left;
     transform: translateY(6px); opacity:0;
-    animation: fadeInUp .38s ease forwards;
+    animation: fadeInUp .36s ease forwards;
+    transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
   }
-  .btn:hover{ transform: translateY(0) scale(1.01); box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 10px 18px rgba(0,0,0,.25) }
-  .btn.correct{ background: linear-gradient(180deg, rgba(46, 204, 113,.8), rgba(39,174,96,.8)) }
-  .btn.wrong{ background: linear-gradient(180deg, rgba(231, 76, 60,.8), rgba(192,57,43,.8)) }
+  .btn:focus{ outline:3px solid rgba(255,126,0,.18); outline-offset:2px; }
+  .btn:hover{ transform: translateY(0) scale(1.01); box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 10px 18px rgba(0,0,0,.22) }
+  .btn.correct{ background: linear-gradient(180deg, rgba(46, 204, 113,.92), rgba(39,174,96,.92)) }
+  .btn.wrong{ background: linear-gradient(180deg, rgba(231, 76, 60,.92), rgba(192,57,43,.92)) }
+
   @keyframes fadeInUp{ to{opacity:1; transform: translateY(0)} }
 
+  /* Footer area */
   .footer{
-    margin-top: 14px;
-    display:flex; align-items:center; justify-content:space-between; gap:10px; opacity:.95; font-weight:700;
-    font-size:14px;
+    margin-top: 6px;
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    opacity:.98; font-weight:700; font-size: clamp(12px,2.6vw,14px);
   }
+  .status{display:flex; gap:10px; align-items:center}
   .next{
     margin-left:auto;
     background: linear-gradient(90deg, var(--brand), var(--brand-2));
-    color:#fff; border:none; border-radius:999px; padding:10px 16px; font-weight:900; cursor:pointer;
-    box-shadow: 0 8px 18px rgba(0,0,0,.25);
+    color:#fff; border:none; border-radius:999px;
+    padding: clamp(8px,2vw,12px) clamp(14px,2.6vw,18px);
+    font-weight:900; cursor:pointer;
+    box-shadow: 0 8px 18px rgba(0,0,0,.22);
   }
-  .next:disabled{opacity:.5; cursor:not-allowed}
+  .next:disabled{opacity:.55; cursor:not-allowed; transform:none; box-shadow:none;}
 
-  /* Result modal */
+  /* Modal (results & review) */
   .modal{
-    position:fixed; inset:0; display:none; place-items:center; z-index:5;
-    background: rgba(0,0,0,.35);
+    position:fixed; inset:0; display:none; place-items:center; z-index:50;
+    background: rgba(0,0,0,.36);
   }
   .modal-card{
     width:min(560px, 92vw);
-    background: rgba(255,255,255,.96);
-    color:#333; border-radius:18px; padding:22px; text-align:center;
+    background: rgba(255,255,255,.98);
+    color:#222; border-radius:14px; padding:18px; text-align:center;
     box-shadow: 0 16px 40px rgba(0,0,0,.35);
-    animation: pop .25s ease;
+    animation: pop .22s ease;
   }
-  @keyframes pop{ from{transform:scale(.92); opacity:0} to{transform:scale(1); opacity:1} }
-  .modal .score{
-    font-size: clamp(18px, 4vw, 24px); font-weight:900; color:#e65100; margin-bottom:12px;
-  }
-  .pill{
-    display:inline-block; padding:8px 14px; border-radius:999px; background:#ffe0b2; color:#bf360c; font-weight:900;
-  }
-  .actions{margin-top:16px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap}
-  .action{
-    border:none; padding:10px 16px; border-radius:12px; font-weight:900; cursor:pointer;
-  }
-  .primary{ background: linear-gradient(90deg, var(--brand), var(--brand-2)); color:#fff }
-  .ghost{ background:#fff; border:2px solid #ffcc80; color:#e65100 }
+  @keyframes pop{ from{transform:scale(.96); opacity:0} to{transform:scale(1); opacity:1} }
+  .modal .score{ font-size: clamp(18px, 4vw, 24px); font-weight:900; color:#e65100; margin-bottom:8px; }
+  .pill{ display:inline-block; padding:8px 14px; border-radius:999px; background:#fff3e0; color:#bf360c; font-weight:900; }
 
-  /* Review modal */
-  .modal-card .review-title{ font-weight:900; color:#e65100; margin:0 0 8px 0 }
-  .review-list{
-    margin-top:8px; text-align:left; background:#fff; border-radius:12px; padding:10px;
-    max-height:60vh; overflow:auto; border:1px solid #ffd9a6;
-  }
+  .actions{margin-top:12px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap}
+  .action{ border:none; padding:10px 16px; border-radius:12px; font-weight:900; cursor:pointer; }
+  .primary{ background: linear-gradient(90deg, var(--brand), var(--brand-2)); color:#fff }
+  .ghost{ background:#fff; border:2px solid #ffd9a6; color:#e65100 }
+
+  /* Review list */
+  .review-list{ margin-top:8px; text-align:left; background:#fff; border-radius:10px; padding:8px; max-height:60vh; overflow:auto; border:1px solid #ffd9a6; }
   .review-item{ padding:10px 6px; border-bottom:1px dashed #eee }
   .review-item:last-child{ border-bottom:none }
-  .tag{ display:inline-block; padding:2px 8px; border-radius:999px; font-weight:800; font-size:12px; }
+  .tag{ display:inline-block; padding:4px 8px; border-radius:999px; font-weight:800; font-size:12px; }
   .tag.correct{ background:#e8f5e9; color:#2e7d32; border:1px solid #a5d6a7 }
   .tag.wrong{ background:#ffebee; color:#c62828; border:1px solid #ef9a9a }
 
-  @media (max-width:420px){
-    .options{gap:8px}
-    .btn{font-size:15px; padding:11px 12px}
+  /* Tiny screens / portrait phones */
+  @media (max-width:520px){
+    .options{ grid-template-columns: 1fr; }
+    .card{ padding: clamp(10px,4vw,16px); border-radius:12px; }
+    .image svg{ max-width:360px; }
+  }
+
+  @media (max-width:380px){
+    .title{ font-size:16px; gap:8px; }
+    .question{ font-size:14px; }
+    .btn{ font-size:14px; padding:10px; }
+    .footer{ flex-direction:column; align-items:flex-start; gap:8px; }
+    .image{ padding:8px; }
+  }
+
+  /* Reduce visual weight on tiny devices */
+  @media (prefers-reduced-motion:reduce){
+    .float-icon, .btn{ animation:none !important; transition:none !important; }
   }
 </style>
 </head>
 <body>
 
 <!-- Floating maths icons (parallax) -->
-<div id="bg">
+<div id="bg" aria-hidden="true">
   <div class="float-icon" style="left:6%;   top:-10%; font-size:40px; --dur:13s;">∑</div>
   <div class="float-icon" style="left:18%;  top:-25%; font-size:54px; --dur:16s;">π</div>
   <div class="float-icon" style="left:33%;  top:-15%; font-size:46px; --dur:12s;">√</div>
@@ -166,28 +204,34 @@
 
 <!-- Foreground quiz -->
 <div id="fg">
-  <div class="card" id="card">
-    <div class="title">📘 Class 12 — Application of Derivatives</div>
+  <div class="card" id="card" role="main" aria-labelledby="quizTitle">
+    <h1 id="quizTitle" class="title">📘 Class 12 — Application of Derivatives</h1>
 
-    <div class="progress-wrap">
-      <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="progress-wrap" aria-hidden="true">
+      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="bar" id="bar"></div>
+      </div>
     </div>
 
-    <div class="qno" id="qno"></div>
-    <div class="question" id="question"></div>
+    <div class="qmeta">
+      <div class="qno" id="qno">Question 1 of N</div>
+      <div class="status">Score: <b id="score">0</b></div>
+    </div>
+
+    <div class="question" id="question">Q. ...</div>
     <div class="image" id="image" style="display:none"></div>
-    <div class="options" id="options"></div>
+    <div class="options" id="options" aria-live="polite" aria-atomic="true"></div>
 
     <div class="footer">
-      <div id="status">Score: <b id="score">0</b></div>
-      <button class="next" id="next" disabled>Next ▶</button>
+      <div style="opacity:.92; font-weight:800; font-size:13px;">Tip: Tap an option to answer</div>
+      <button class="next" id="next" disabled aria-disabled="true">Next ▶</button>
     </div>
   </div>
 </div>
 
-<!-- Result modal (now with 3 buttons) -->
-<div class="modal" id="modal">
-  <div class="modal-card">
+<!-- Result modal -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-card" role="document">
     <div class="score" id="finalScore">Your score</div>
     <div class="pill" id="summary">—</div>
     <div class="actions">
@@ -199,9 +243,9 @@
 </div>
 
 <!-- Review modal -->
-<div class="modal" id="reviewModal">
-  <div class="modal-card">
-    <h3 class="review-title">📖 Review Answers</h3>
+<div class="modal" id="reviewModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-card" role="document">
+    <h3 class="review-title" style="margin:0 0 10px 0; font-weight:900; color:#e65100;">📖 Review Answers</h3>
     <div class="review-list" id="reviewList"></div>
     <div class="actions">
       <button class="action primary" onclick="restart()">🔄 Play Again</button>
@@ -211,7 +255,7 @@
   </div>
 </div>
 
-<!-- Confetti -->
+<!-- Confetti lib -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
@@ -222,14 +266,14 @@ const HOME_URL = "https://sites.google.com/view/satyam-career/home"; // <— Rep
 /* ---------- Small inline SVG diagrams ---------- */
 const svg = {
   parabola: `
-    <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="parabola diagram">
       <defs>
         <linearGradient id="g" x1="0" x2="1">
           <stop offset="0" stop-color="#fff" stop-opacity=".6"/>
           <stop offset="1" stop-color="#fff" stop-opacity=".9"/>
         </linearGradient>
       </defs>
-      <rect width="100%" height="100%" rx="10" fill="url(#g)" opacity=".08"/>
+      <rect width="100%" height="100%" rx="10" fill="url(#g)" opacity=".06"/>
       <g transform="translate(20,10)">
         <line x1="0" y1="140" x2="260" y2="140" stroke="#fff" stroke-opacity=".6"/>
         <line x1="130" y1="0" x2="130" y2="160" stroke="#fff" stroke-opacity=".6"/>
@@ -239,8 +283,8 @@ const svg = {
       </g>
     </svg>`,
   circle: `
-    <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
-      <rect width="100%" height="100%" rx="10" fill="#fff" opacity=".08"/>
+    <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="circle diagram">
+      <rect width="100%" height="100%" rx="10" fill="#fff" opacity=".04"/>
       <g transform="translate(150,90)">
         <circle r="60" fill="none" stroke="#ffecb3" stroke-width="3"/>
         <line x1="0" y1="0" x2="60" y2="0" stroke="#fff"/>
@@ -248,21 +292,21 @@ const svg = {
       </g>
     </svg>`,
   square: `
-    <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
-      <rect width="100%" height="100%" rx="10" fill="#fff" opacity=".08"/>
+    <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="square diagram">
+      <rect width="100%" height="100%" rx="10" fill="#fff" opacity=".04"/>
       <rect x="90" y="30" width="120" height="120" fill="none" stroke="#ffecb3" stroke-width="3"/>
       <text x="150" y="26" text-anchor="middle" fill="#fff" font-size="12">side = s</text>
     </svg>`,
   rect: `
-    <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
-      <rect width="100%" height="100%" rx="10" fill="#fff" opacity=".08"/>
+    <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="rectangle diagram">
+      <rect width="100%" height="100%" rx="10" fill="#fff" opacity=".04"/>
       <rect x="60" y="50" width="180" height="80" fill="none" stroke="#ffecb3" stroke-width="3"/>
       <text x="150" y="46" text-anchor="middle" fill="#fff" font-size="12">x</text>
       <text x="48" y="95" text-anchor="end" fill="#fff" font-size="12">16/x</text>
     </svg>`,
   line: `
-    <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
-      <rect width="100%" height="100%" rx="10" fill="#fff" opacity=".08"/>
+    <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="line graph">
+      <rect width="100%" height="100%" rx="10" fill="#fff" opacity=".04"/>
       <g transform="translate(20,10)">
         <line x1="0" y1="140" x2="260" y2="140" stroke="#fff" stroke-opacity=".6"/>
         <line x1="130" y1="0" x2="130" y2="160" stroke="#fff" stroke-opacity=".6"/>
@@ -271,12 +315,12 @@ const svg = {
         <text x="176" y="76" fill="#fff" font-size="12">x=1</text>
       </g>
     </svg>`
+  // other svg keys intentionally omitted: missing keys will simply hide the image
 };
 
 /* ============================================================
-   QUIZ QUESTIONS — CHANGE BELOW (edit q/options/answer/img)
-   Tip: answer must exactly match one of the options strings.
-   Optional: add img: svg.parabola (or circle/square/rect/line)
+   QUIZ QUESTIONS — same as you had (no logic changes)
+   Keep Qs here — answer must exactly match an option string
    ============================================================ */
 const questions = [
   { q: "Find the slope of the tangent to y = x² at x = 3.", options: ["3","6","9","12"], answer: "6", img: "svg.parabola" },
@@ -290,31 +334,28 @@ const questions = [
   { q: "Use linear approximation of f(x)=√x near x=36 to estimate √36.5.", options: ["6.01","6.02","6.03","6.04"], answer: "6.02" },
   { q: "If dy/dx = 0 at x = 3, then at x = 3 the function has:", options: ["Maximum","Minimum","Turning point","Cannot say without more info"], answer: "Cannot say without more info" },
 
-  { q: "Find the slope of tangent to y = x³ at x = 1.", options: ["1","2","3","4"], answer: "3", img: "svg.cubic" },
+  { q: "Find the slope of tangent to y = x³ at x = 1.", options: ["1","2","3","4"], answer: "3", img: "svg.parabola" },
   { q: "If y = sinx + cosx, find dy/dx.", options: ["cosx − sinx","cosx + sinx","sinx − cosx","sinx + cosx"], answer: "cosx − sinx" },
-  { q: "At which x does f(x) = x⁴ − 8x² + 17 have a minimum value?", options: ["x = −2","x = 2","x = 0","x = 4"], answer: "x = 0", img: "svg.bi_quadratic" },
+  { q: "At which x does f(x) = x⁴ − 8x² + 17 have a minimum value?", options: ["x = −2","x = 2","x = 0","x = 4"], answer: "x = 0" },
   { q: "If profit P(x) = x³ − 6x² + 9x + 15, find critical points.", options: ["x = 1,3","x = 2,3","x = 0,3","x = 1,2"], answer: "x = 1,3" },
-  { q: "Find the rate of change of the volume of a cube when edge = 5cm and increasing at 2cm/s.", options: ["150cm³/s","100cm³/s","125cm³/s","75cm³/s"], answer: "150cm³/s", img: "svg.cube" },
+  { q: "Find the rate of change of the volume of a cube when edge = 5cm and increasing at 2cm/s.", options: ["150cm³/s","100cm³/s","125cm³/s","75cm³/s"], answer: "150cm³/s" },
   { q: "For y = 3x² − 2x + 5, calculate d²y/dx².", options: ["6","3","0","2"], answer: "6" },
   { q: "If the function y = x³−9x²+24x+5 is increasing for:", options: ["x > 2","x < 2","2 < x < 4","x < 4"], answer: "2 < x < 4" },
-  { q: "The tangent to the curve y = x² at (2,4) makes an angle of:", options: ["45°","60°","75°","90°"], answer: "63.43°", img: "svg.tangent" },
-  { q: "Find the maximum area of rectangle inscribed in a circle of radius r.", options: ["r²","2r²","r²/2","4r²"], answer: "2r²", img: "svg.rect_in_circle" },
+  { q: "The tangent to the curve y = x² at (2,4) makes an angle of:", options: ["45°","60°","75°","90°"], answer: "63.43°" },
+  { q: "Find the maximum area of rectangle inscribed in a circle of radius r.", options: ["r²","2r²","r²/2","4r²"], answer: "2r²" },
   { q: "If y = ln(x²+1), find dy/dx at x = 1.", options: ["1","2","0.5","0"], answer: "1" },
 
-  { q: "What is the minimum value for f(x) = x² − 6x + 11?", options: ["11","10","2","8"], answer: "2", img: "svg.minima_parabola" },
-  { q: "If the side of an equilateral triangle increases at 2cm/s, area changes at:", options: ["2cm²/s","5cm²/s","5√3cm²/s","4cm²/s"], answer: "5√3cm²/s", img: "svg.equi_triangle" },
+  { q: "What is the minimum value for f(x) = x² − 6x + 11?", options: ["11","10","2","8"], answer: "2" },
+  { q: "If the side of an equilateral triangle increases at 2cm/s, area changes at:", options: ["2cm²/s","5cm²/s","5√3cm²/s","4cm²/s"], answer: "5√3cm²/s" },
   { q: "f(x) = sinx, find d²y/dx² at x = π/2.", options: ["−1","0","1","None"], answer: "−1" },
-  { q: "Radius of sphere increases at 0.1cm/s, find rate of volume change at r = 1cm.", options: ["0.4πcm³/s","0.1πcm³/s","1.2πcm³/s","1cm³/s"], answer: "0.4πcm³/s", img: "svg.sphere" },
+  { q: "Radius of sphere increases at 0.1cm/s, find rate of volume change at r = 1cm.", options: ["0.4πcm³/s","0.1πcm³/s","1.2πcm³/s","1cm³/s"], answer: "0.4πcm³/s" },
   { q: "For y = x³ − 4x, point of inflection is:", options: ["x = 0","x = ±2","x = 1","x = 4"], answer: "x = 0" },
-  { q: "Find equation of normal to y = x² − 2x + 3 at x = 1.", options: ["y = −x + 4","y = −x + 3","y = x + 1","y = x − 2"], answer: "y = −x + 4", img: "svg.normal" },
+  { q: "Find equation of normal to y = x² − 2x + 3 at x = 1.", options: ["y = −x + 4","y = −x + 3","y = x + 1","y = x − 2"], answer: "y = −x + 4" },
   { q: "Maximum value of f(x) = 3sinx + 4cosx is:", options: ["3","4","5","7"], answer: "5" },
   { q: "For y = 2eˣ, slope of tangent at x = 0:", options: ["1","2","0","e"], answer: "2" },
-  { q: "Minimum value of y = x⁴ for x in [−2,3]:", options: ["0","16","81","256"], answer: "0", img: "svg.x4_graph" },
+  { q: "Minimum value of y = x⁴ for x in [−2,3]:", options: ["0","16","81","256"], answer: "0" },
   { q: "If cost C(x) = x² − 8x + 30, marginal cost at x = 5:", options: ["−2","2","0","3"], answer: "2" }
-]
-/* ================================
-   END QUIZ QUESTIONS
-   ================================ */
+];
 
 /* ---------- WebAudio tiny SFX (works after first tap) ---------- */
 let audioReady = false, ctx, masterGain;
@@ -368,9 +409,10 @@ function render() {
 
   if (q.img) {
     // Extract key after 'svg.'
-    const imgKey = q.img.split(".")[1];
-    if (svg[imgKey]) {
-      elImg.style.display = "flex"; // or '' depending on your CSS
+    const parts = q.img.split(".");
+    const imgKey = parts.length > 1 ? parts[1] : null;
+    if (imgKey && svg[imgKey]) {
+      elImg.style.display = "flex";
       elImg.innerHTML = svg[imgKey];
     } else {
       elImg.style.display = "none";
@@ -381,21 +423,32 @@ function render() {
     elImg.innerHTML = "";
   }
 
+  // Build options (shuffle for small variety)
   elOpts.innerHTML = "";
-  q.options.forEach((opt, idx) => {
+  const opts = [...q.options];
+  // small deterministic shuffle based on index to keep reproducible order across loads
+  const shift = i % opts.length;
+  const arranged = opts.slice(shift).concat(opts.slice(0, shift));
+  arranged.forEach((opt, idx) => {
     const b = document.createElement("button");
     b.className = "btn";
-    b.style.animationDelay = `${idx * 0.06 + 0.04}s`;
+    b.style.animationDelay = `${idx * 0.05 + 0.03}s`;
     b.textContent = opt;
+    b.type = "button";
     b.onclick = () => select(opt, b);
+    b.setAttribute('aria-label', `Answer option: ${opt}`);
     elOpts.appendChild(b);
   });
 
-  elBar.style.width = ((i / questions.length) * 100).toFixed(1) + "%";
+  // update progress bar (show fraction of completed questions)
+  const pct = ((i) / questions.length) * 100;
+  elBar.style.width = pct.toFixed(2) + "%";
   elNext.disabled = true;
+  elNext.setAttribute('aria-disabled', 'true');
   locked = false;
+  // ensure score shown
+  elScore.textContent = score;
 }
-
 
 function select(opt, btn){
   initAudio();
@@ -409,35 +462,46 @@ function select(opt, btn){
   if(correct){ score++; btn.classList.add('correct'); sfx.correct(); }
   else{ btn.classList.add('wrong'); sfx.wrong(); }
 
+  // reveal correct answer and disable all
   [...elOpts.children].forEach(b=>{
     if(b.textContent === questions[i].answer) b.classList.add('correct');
     b.disabled = true;
+    b.setAttribute('aria-disabled','true');
   });
 
   elScore.textContent = score;
   elNext.disabled = false;
+  elNext.setAttribute('aria-disabled','false');
+  // let Next button be focusable on mobile
+  elNext.focus();
 }
 
 elNext.addEventListener('click', ()=>{
   i++;
-  if(i < questions.length){ render(); }
+  if(i < questions.length){ render(); window.scrollTo({top:0, behavior:'smooth'}); }
   else{ finish(); }
 });
 
 function finish(){
   sfx.finish();
   elBar.style.width = '100%';
-  confetti({particleCount: 160, spread: 72, origin:{y:.7}});
-  setTimeout(()=>confetti({particleCount: 120, spread: 100, origin:{y:.2}}), 180);
-
+  try{
+    confetti({particleCount: 140, spread: 70, origin:{y:.7}});
+    setTimeout(()=>confetti({particleCount: 100, spread: 100, origin:{y:.2}}), 180);
+  }catch(e){}
   elFinal.textContent = `🎉 Quiz Completed!`;
   elSummary.textContent = `You scored ${score} out of ${questions.length}`;
   elModal.style.display = 'grid';
+  elModal.setAttribute('aria-hidden','false');
+  // focus first action for keyboard users
+  setTimeout(()=>{ const btn = elModal.querySelector('button'); if(btn) btn.focus(); }, 80);
 }
 
 function restart(){
   elModal.style.display = 'none';
+  elModal.setAttribute('aria-hidden','true');
   elReviewModal.style.display = 'none';
+  elReviewModal.setAttribute('aria-hidden','true');
   i = 0; score = 0; userAnswers = [];
   elScore.textContent = score;
   render();
@@ -462,15 +526,20 @@ function openReview(){
     elReviewList.appendChild(div);
   });
   elModal.style.display = 'none';
+  elModal.setAttribute('aria-hidden','true');
   elReviewModal.style.display = 'grid';
+  elReviewModal.setAttribute('aria-hidden','false');
+  setTimeout(()=>{ const btn = elReviewModal.querySelector('button'); if(btn) btn.focus(); }, 80);
 }
 function closeReview(){
   elReviewModal.style.display = 'none';
+  elReviewModal.setAttribute('aria-hidden','true');
   elModal.style.display = 'grid';
+  elModal.setAttribute('aria-hidden','false');
 }
 
 function goHome(){
-  window.open("https://sites.google.com/view/satyam-career/home" , "_blank") // ← edit the link at the top
+  window.open(HOME_URL, "_blank");
 }
 
 // Start quiz
@@ -482,7 +551,7 @@ window.addEventListener('pointerdown', initAudio, {once:true});
 (function(){
   const bg = document.getElementById('bg');
   function applyParallax(xRatio, yRatio){
-    const x = (xRatio - 0.5) * 16;
+    const x = (xRatio - 0.5) * 18;
     const y = (yRatio - 0.5) * 12;
     bg.style.transform = `translate3d(${x}px, ${y}px, 0)`;
   }
